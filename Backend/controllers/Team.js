@@ -243,7 +243,6 @@ const makeCaptain = async (req, res, next) => {
   try {
     const { id:teamId } = req.params;
     const { playerId } = req.body;
-    console.log("makecaptain")
 
     const team = await Team.findById(teamId);
     if (!team) {

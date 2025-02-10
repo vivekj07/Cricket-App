@@ -221,7 +221,6 @@ const updateTeamScore = async (req, res, next) => {
     const { scoreboardId } = req.params;
     const {teamId,runs,wickets,overs} = req.body;
 
-    console.log(scoreboardId,teamId,runs,wickets,overs)
     const scoreBoard = await ScoreBoard.findById(scoreboardId);
 
     if (!scoreBoard) {
@@ -269,13 +268,10 @@ const updateBatsmanStats = async (req, res, next) => {
     }else if(scoreBoard.teamInnings[1].team == teamId){
       teamInd=1
     }else{
-      console.log(scoreBoard)
       return next(new ErrorHandler("Team not found", 404));
     }
 
-    console.log(playerId)
     const map= scoreBoard.teamInnings[teamInd].batsmenStats.map((batsman)=>  batsman.player._id);
-    console.log(map)
 
     const index= scoreBoard.teamInnings[teamInd].batsmenStats.findIndex((batsman)=> batsman.player._id == playerId);
 
@@ -382,7 +378,6 @@ const updateMOM = async (req, res, next) => {
     const { scoreboardId } = req.params;
     const {manOfTheMatch} = req.body;
 
-    console.log(manOfTheMatch)
     const Scoreboard = await ScoreBoard.findById(
       scoreboardId
     );

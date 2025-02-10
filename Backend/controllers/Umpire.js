@@ -88,7 +88,6 @@ const updateUmpire = async (req, res, next) => {
       const { fullName, country, role, experienceYears, dob, status, matchesOfficiatedDetails,matchesOfficiated } = req.body;
       const file = req.file;
   
-      console.log()
       const umpire = await Umpire.findById(umpireId);
       if (!umpire) return next(new ErrorHandler("Umpire not found", 404));
   

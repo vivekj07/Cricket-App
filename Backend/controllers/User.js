@@ -9,7 +9,6 @@ const newUser = async (req, res, next) => {
   try {
     const { name, username, password} = req.body;
     const file = req.file;
-    console.log(name, username, password)
 
     if (!file) return next(new ErrorHandler("Please add photo", 400));
     if (!name || !username || !password) {
