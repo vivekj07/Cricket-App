@@ -3,6 +3,7 @@ import { ErrorHandler } from "../middlewares/error.js";
 import { Match } from "../models/Match.js";
 import { ScoreBoard } from "../models/ScoreBoard.js";
 import { Team } from "../models/Team.js";
+import { io } from "../app.js";
 
 
 // const getScoreBoardOfMatch = async (req, res, next) => {
@@ -115,7 +116,7 @@ const newScoreBoard = async (req, res, next) => {
       .populate({
         path: "teams",
         populate: {
-          path: "players", // Fetching players inside each team
+          path: "players", 
           model: "Player",
         },
       });
@@ -134,7 +135,6 @@ const newScoreBoard = async (req, res, next) => {
       return next(new ErrorHandler("Invalid match teams", 400));
     }
 
-    // Initializing team innings with default values
     const teamInnings = teams.map((team) => ({
       team: team._id,
       runs: 0,
@@ -167,7 +167,6 @@ const newScoreBoard = async (req, res, next) => {
       })),
     }));
 
-    // Creating ScoreBoard entry with default values
     const scoreBoard = await ScoreBoard.create({
       match,
       teamInnings,
@@ -176,9 +175,10 @@ const newScoreBoard = async (req, res, next) => {
       summary: "",
     });
 
-    // Linking the scoreboard to the match
     matchExists.scoreboard = scoreBoard._id;
     await matchExists.save();
+
+    io.emit("updateScoreboard", {matchId:scoreBoard.match});
 
     res.status(201).json({
       success: true,
@@ -205,6 +205,8 @@ const updateScoreBoard = async (req, res, next) => {
     if (!updatedScoreboard) {
       return next(new ErrorHandler("Scoreboard not found", 404));
     }
+
+    io.emit("updateScoreboard",{matchId:updatedScoreboard.match});
 
     res.status(200).json({
       success: true,
@@ -240,6 +242,8 @@ const updateTeamScore = async (req, res, next) => {
     }
 
     await scoreBoard.save()
+
+    io.emit("updateScoreboard",{matchId:scoreBoard.match});
 
     res.status(200).json({
       success: true,
@@ -287,6 +291,8 @@ const updateBatsmanStats = async (req, res, next) => {
 
     await scoreBoard.save()
 
+    io.emit("updateScoreboard",{matchId:scoreBoard.match});
+
     res.status(200).json({
       success: true,
       message: "Batsman stats updated successfully",
@@ -327,6 +333,8 @@ const updateBowlerStats = async (req, res, next) => {
 
     await scoreBoard.save()
 
+    io.emit("updateScoreboard",{matchId:scoreBoard.match});
+
     res.status(200).json({
       success: true,
       message: "Bowler stats updated successfully",
@@ -364,6 +372,8 @@ const updateExtras = async (req, res, next) => {
 
     await scoreBoard.save()
 
+    io.emit("updateScoreboard",{matchId:scoreBoard.match});
+
     res.status(200).json({
       success: true,
       message: "Extras updated successfully",
@@ -388,6 +398,8 @@ const updateMOM = async (req, res, next) => {
 
     Scoreboard.manOfTheMatch=manOfTheMatch
     await Scoreboard.save()
+
+    io.emit("updateScoreboard",{matchId:Scoreboard.match});
 
     res.status(200).json({
       success: true,
@@ -419,6 +431,9 @@ const deleteScoreBoard = async (req, res, next) => {
 
       matchExists.scoreboard=null
       await matchExists.save()
+
+    io.emit("updateScoreboard",{matchId});
+
   
       res.status(200).json({
         success: true,

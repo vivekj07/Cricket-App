@@ -7,15 +7,18 @@ import { Provider } from 'react-redux'
 import store from "../src/redux/store.js"
 import { CssBaseline } from '@mui/material'
 import { HelmetProvider } from 'react-helmet-async'
+import { SocketProvider } from './socket.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
     <HelmetProvider>
       <CssBaseline>
-        <Provider store={store}>
-          <App />
-        </Provider>
+        <SocketProvider>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </SocketProvider>
       </CssBaseline>
     </HelmetProvider>
-  </StrictMode>,
+  // </StrictMode>,
 )

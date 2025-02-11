@@ -3,7 +3,6 @@ import { ErrorHandler } from "./error.js"
 import { User } from "../models/User.js"
 
 export const isAuthenticated = (req, res, next) => {
-    console.log("auth middleware")
     const token = req.cookies[`cricketApp-user-token`]
 
     if (!token) return next(new ErrorHandler("Please Login first", 400))
@@ -14,8 +13,6 @@ export const isAuthenticated = (req, res, next) => {
 }
 
 export const adminOnly = async (req, res, next) => {
-    console.log("admin middleware")
-
     const token = req.cookies[`cricketApp-user-token`]
     if (!token) return next(new ErrorHandler("Please Login first", 400))
     

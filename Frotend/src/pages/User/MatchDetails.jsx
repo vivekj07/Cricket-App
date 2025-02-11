@@ -20,16 +20,28 @@ import AppLayout from "../../components/layout/AppLayout";
 import Loader from "../../components/loaders/Loader";
 import { useCustomMutation, useErrors } from "../../hooks/hooks";
 import { useDeleteScoreBoardMutation, useGenerateScoreBoardMutation, useGetMatchDetailsQuery, useUpdateMatchResultMutation, useUpdateMOMMutation, useUpdatePlayerStatsMutation } from "../../redux/api/api";
+import { getSocket } from "../../socket";
 
 const MatchDetails = () => {
+  const socket=getSocket()
   const params = useParams();
   const {id}= params
 
   const [match, setMatch] = useState({});
   const [scoreboard, setScoreboard] = useState({});
-  
-  const { data, isLoading, error, isError } = useGetMatchDetailsQuery(id);
+  const { data, isLoading, error, isError, refetch } = useGetMatchDetailsQuery(id);
   useErrors([{ isError, error }]);
+
+  const updateScoreHandler=(data)=>{
+    // console.log(data)
+    if(id != data.matchId) return;
+    // console.log("refetched")
+    refetch()
+    // console.log(scoreboard.match, data.scoreBoard.match)
+    // if(scoreboard.match != data.scoreBoard.match) return;
+    // console.log("score seted")
+    // setScoreboard(data.scoreBoard)
+  }
 
 
   useEffect(() => {
@@ -38,6 +50,14 @@ const MatchDetails = () => {
       setScoreboard(data.match?.scoreboard); // Use data.match instead of match
     }
   }, [data]);
+
+  useEffect(()=>{
+    socket.on("updateScoreboard",(data)=> updateScoreHandler(data))
+
+    return ()=>{
+      socket.off("updateScoreboard")
+    }
+  },[])
 
   return isLoading ? <Loader /> : (
     <div

@@ -23,7 +23,8 @@
     "react-helmet-async": "^2.0.5",
     "react-hot-toast": "^2.5.1",
     "react-redux": "^9.2.0",
-    "react-router-dom": "^7.1.5"
+    "react-router-dom": "^7.1.5",
+    "socket.io-client": "^4.8.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

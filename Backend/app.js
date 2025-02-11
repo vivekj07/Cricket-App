@@ -5,8 +5,8 @@ import { v2 as cloudinary } from "cloudinary"
 import cookieParser from "cookie-parser";
 import cors from "cors"
 import morgan from "morgan"
-
-
+import {createServer} from "http"
+import {Server} from "socket.io"
 
 import leagueRoute from "./routes/League.js"
 import teamRoute from "./routes/Team.js"
@@ -22,6 +22,15 @@ import { errorMiddleware } from "./middlewares/error.js"
 import { isAuthenticated } from "./middlewares/auth.js";
 
 const app = express()
+const httpServer = createServer(app)
+export const io = new Server(httpServer, {
+  cors: {
+    origin:['http://localhost:5173', 'http://localhost:4173',process.env.CLIENT_URL],
+    methods:["GET", "POST", "PUT", "DELETE"],
+    credentials:true
+  }
+})
+
 
 dotenv.config({
     path:"./.env",
@@ -33,6 +42,8 @@ cloudinary.config({
 })
 
 const port = process.env.PORT || 4000
+export const onlineUsers = new Set()
+
 connectDB()
 
 app.use(bodyParser.json())
@@ -57,8 +68,21 @@ app.use("/api/v1/venue",isAuthenticated,venueRoute)
 app.use("/api/v1/umpire",isAuthenticated,umpireRoute)
 app.use("/api/v1/pointsTable",isAuthenticated,pointsTableRoute)
 
+io.on("connection",(socket)=>{
+  console.log("connected",socket.id)
+  onlineUsers.add(socket.id)
+
+  io.emit("onlineUsers",onlineUsers.size)
+  
+  socket.on("disconnect",()=>{
+    console.log("disconnected")
+    onlineUsers.delete(socket.id)
+    io.emit("onlineUsers", onlineUsers.size);
+  })
+}
+)
 
 app.use(errorMiddleware)
-app.listen(port, () => {
+httpServer.listen(port, () => {
   console.log(`app listening on port ${port}`)
 })
