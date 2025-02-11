@@ -18,9 +18,9 @@ const EditBatsmanStats = ({ open, onClose, initialData}) => {
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
       <DialogTitle>Edit Batsman Stats</DialogTitle>
-      <DialogContent>
+      <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2, padding: "1rem" }}>
         <TextField label="Runs" type="number" fullWidth value={batsman.runs} onChange={(e) => setBatsman({ ...batsman, runs: e.target.value })} />
         <TextField label="Balls" type="number" fullWidth value={batsman.balls} onChange={(e) => setBatsman({ ...batsman, balls: e.target.value })} />
         <TextField label="Fours" type="number" fullWidth value={batsman.fours} onChange={(e) => setBatsman({ ...batsman, fours: e.target.value })} />

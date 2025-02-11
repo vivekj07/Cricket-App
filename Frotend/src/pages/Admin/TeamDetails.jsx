@@ -54,7 +54,7 @@ const TeamDetails = () => {
         <Typography variant="h6">Coach: {team?.coach}</Typography>
         <Typography variant="h6">Captain: {team?.captain?.fullName}</Typography>
         <Typography variant="h6">
-          Home Venue: {team?.homeVenue?.name}, {team?.homeVenue?.city}, {team?.homeVenue?.country}
+          Home Venue: {team?.homeVenue ? <> {team?.homeVenue?.name}, {team?.homeVenue?.city}, {team?.homeVenue?.country}</> :<>-</>}
         </Typography>
 
         <Button variant="contained" sx={{ mt: 2 }} onClick={() => setOpenDialog(true)}>

@@ -67,7 +67,7 @@ const VenueList = () => {
   return (
     <div>
       <Paper elevation={3} sx={{ padding: "2rem 1rem" }}>
-        {isLoading ? <Loader /> : <Table rows={venues} columns={columns} heading="Venue Management" />}
+        {isLoading ? <Loader /> : <Table rows={venues} columns={columns} heading="Venues" />}
       </Paper>
     </div>
   );

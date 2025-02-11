@@ -141,6 +141,15 @@ const api = createApi({
             }),
             invalidatesTags:["Player"]
         }),
+        updatePlayerPerformance:builder.mutation({
+            query:({id,body})=>({
+                url:`player/update/performance/${id}`,
+                credentials:"include",
+                method:"PUT",
+                body
+            }),
+            invalidatesTags:["Player"]
+        }),
 
 
         // Team
@@ -463,7 +472,7 @@ export const {
     useNewMatchMutation, useDeleteMatchMutation, useUpdateMatchMutation, useUpdateMatchResultMutation,
     useUpdatePlayerStatsMutation,
     useSignUpMutation,useLogOutMutation,useLogInMutation, 
-    useNewPlayerMutation, useDeletePlayerMutation, useUpdatePlayerMutation,
+    useNewPlayerMutation, useDeletePlayerMutation, useUpdatePlayerMutation, useUpdatePlayerPerformanceMutation,
     useNewTeamMutation, useUpdateTeamMutation, useDeleteTeamMutation, useAddPlayersMutation, 
     useRemovePlayerMutation, useMakeCaptainMutation, useUpdateTeamPerformanceMutation,
     useNewLeagueMutation, useUpdateLeagueMutation, useDeleteleagueMutation, useAddTeamsMutation, useRemoveTeamMutation,

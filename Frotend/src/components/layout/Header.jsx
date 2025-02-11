@@ -19,7 +19,7 @@ const Header = () => {
     const navigate=useNavigate()
     const dispatch=useDispatch()
 
-    const [logOut,res]=useCustomMutation(useLogOutMutation)
+    const [logOut,res]=useCustomMutation(useLogOutMutation,"Logging Out...")
 
     const logoutHandler= async ()=>{
         await logOut()

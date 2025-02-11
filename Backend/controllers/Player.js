@@ -161,6 +161,69 @@ const updatePlayer = async (req, res, next) => {
     }
 };
 
+const updatePlayerPerformance = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    console.log(id)
+    const {
+      leagueType,
+      matchesPlayed,
+      noOfTimeDismissed,
+      runsScored,
+      noOfBallsFaced,
+      noOf6s,
+      noOf4s,
+      noOfBallsBowled,
+      runsGiven,
+      wicketsTaken,
+    } = req.body;
+
+    // console.log(req.body)
+    const player = await Player.findById(id);
+    if (!player) return next(new ErrorHandler("Player not found", 404));
+
+    let index = player.performance.findIndex((per) => per.leagueType === leagueType);
+
+    if (index === -1) {
+      player.performance.push({
+        leagueType,
+        matchesPlayed: 0,
+        noOfTimeDismissed: 0,
+        runsScored: 0,
+        noOfBallsFaced: 0,
+        noOf6s: 0,
+        noOf4s: 0,
+        noOfBallsBowled: 0,
+        runsGiven: 0,
+        wicketsTaken: 0,
+      });
+      index = player.performance.length - 1; // Correctly set the new index
+    }
+
+    // Only update if values are provided in the request
+    if (matchesPlayed !== undefined) player.performance[index].matchesPlayed = matchesPlayed;
+    if (noOfTimeDismissed !== undefined) player.performance[index].noOfTimeDismissed = noOfTimeDismissed;
+    if (runsScored !== undefined) player.performance[index].runsScored = runsScored;
+    if (noOfBallsFaced !== undefined) player.performance[index].noOfBallsFaced = noOfBallsFaced;
+    if (noOf6s !== undefined) player.performance[index].noOf6s = noOf6s;
+    if (noOf4s !== undefined) player.performance[index].noOf4s = noOf4s;
+    if (noOfBallsBowled !== undefined) player.performance[index].noOfBallsBowled = noOfBallsBowled;
+    if (runsGiven !== undefined) player.performance[index].runsGiven = runsGiven;
+    if (wicketsTaken !== undefined) player.performance[index].wicketsTaken = wicketsTaken;
+
+    await player.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Player Performance Updated successfully",
+    });
+
+  } catch (err) {
+    next(err);
+  }
+};
+
+
 const deletePlayer = async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -288,5 +351,5 @@ const bulkUploadPlayers = async (req, res, next) => {
 export 
 {
     getAllPlayers,searchPlayerByName,getPlayerById,
-    newPlayer,updatePlayer,deletePlayer,bulkUploadPlayers
+    newPlayer,updatePlayer,deletePlayer,bulkUploadPlayers, updatePlayerPerformance
 };

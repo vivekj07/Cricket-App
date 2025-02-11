@@ -1,5 +1,5 @@
 import express from "express"
-import { bulkUploadPlayers, deletePlayer, getAllPlayers, getPlayerById, newPlayer, searchPlayerByName, updatePlayer } from "../controllers/Player.js"
+import { bulkUploadPlayers, deletePlayer, getAllPlayers, getPlayerById, newPlayer, searchPlayerByName, updatePlayer, updatePlayerPerformance } from "../controllers/Player.js"
 import { singleImage } from "../middlewares/multer.js"
 import { adminOnly } from "../middlewares/auth.js"
 
@@ -13,6 +13,7 @@ app.use(adminOnly)
 app.post("/new",singleImage,newPlayer)
 app.post("/new/bulkupload",singleImage,bulkUploadPlayers)
 
+app.put("/update/performance/:id",updatePlayerPerformance)
 app.put("/update/:id",singleImage,updatePlayer)
 
 app.delete("/delete/:id",deletePlayer)

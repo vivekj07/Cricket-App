@@ -95,11 +95,11 @@ const PlayerDetails = () => {
                 <TableRow key={stat._id}>
                   <TableCell>{stat.leagueType}</TableCell>
                   <TableCell>{stat.matchesPlayed}</TableCell>
-                  <TableCell>{(stat.noOfBallsBowled/6).toFixed(2)}</TableCell>
+                  <TableCell>{(stat.noOfBallsBowled/6).toFixed(0)}</TableCell>
                   <TableCell>{stat.runsGiven}</TableCell>
                   <TableCell>{stat.wicketsTaken}</TableCell>
                   <TableCell>{(stat.runsGiven/stat.matchesPlayed).toFixed(2)}</TableCell>
-                  <TableCell>{(stat.runsGiven/stat.noOfBallsBowled).toFixed(2)}</TableCell>
+                  <TableCell>{((stat.runsGiven/stat.noOfBallsBowled)*6).toFixed(2)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

@@ -75,7 +75,14 @@ const EditPlayer = ({ open, onClose, player }) => {
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>Edit Player</DialogTitle>
-      <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2, padding: "1rem" }}>
+      <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2, padding: "1rem",
+        overflow: "auto",
+              "&::-webkit-scrollbar": { // Corrected syntax
+                display: "none",
+              },
+              scrollbarWidth: "none", // For Firefox
+              msOverflowStyle: "none", // For IE and Edge
+       }}>
         <TextField label="Full Name" name="fullName" value={playerData?.fullName} onChange={handleChange} required />
         <TextField label="Date of Birth" type="date" name="dob" value={playerData?.dob} onChange={handleChange} required InputLabelProps={{ shrink: true }} />
         <TextField label="Country" name="country" value={playerData?.country} onChange={handleChange} required />
@@ -86,7 +93,7 @@ const EditPlayer = ({ open, onClose, player }) => {
           Upload Photo
           <input type="file" hidden accept="image/*" onChange={handleFileChange} />
         </Button>
-        {avatarSrc && <img src={avatarSrc} alt="Player Avatar" />}
+        {avatarSrc && <img src={avatarSrc} alt="Player Avatar" height={"auto"} width={"170px"}/>}
 
         <div style={{ display: "flex", justifyContent: "space-between", marginTop: "1rem" }}>
           <Button variant="contained" color="primary" onClick={handleSubmit}>

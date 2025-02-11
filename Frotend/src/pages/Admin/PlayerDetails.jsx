@@ -1,16 +1,20 @@
-import { Avatar, Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Avatar, Button, Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AdminLayout from "../../components/layout/AdminLayout";
 import Loader from "../../components/loaders/Loader";
 import { useErrors } from "../../hooks/hooks";
 import { useGetPlayerDetailsQuery } from "../../redux/api/api";
+import { lazy } from "react";
+
+const EditPlayerPerformance= lazy(()=> import("../../components/Admin/dialogs/EditPlayerPerformance"))
 
 const PlayerDetails = () => {
   const { id } = useParams();
 
-  const [player,setPlayer]= useState({})
-
+  const [player,setPlayer]= useState(null)
+  const [playerStat,setPlayerStat]= useState(null)
+  const [openDialog,setOpenDialog]= useState(false)
   const { data, isLoading, error,isError } = useGetPlayerDetailsQuery(id);
 
  useErrors([{isError,error}])
@@ -20,6 +24,11 @@ const PlayerDetails = () => {
         setPlayer(data.player)
     }
  },[data])
+
+ const handlePlayerUpdate=(stat)=>{ 
+  setPlayerStat(stat)
+  setOpenDialog(true)
+ }
 
   return isLoading ? <Loader /> :(
     <div>
@@ -37,6 +46,8 @@ const PlayerDetails = () => {
         <Typography variant="h6">Batting Style: {player?.battingStyle}</Typography>
         <Typography variant="h6">Bowling Style: {player?.bowlingStyle}</Typography>
 
+        
+
         <Typography variant="h5" sx={{ marginTop: "1.5rem" }}>
           Batting Stats
         </Typography>
@@ -53,6 +64,7 @@ const PlayerDetails = () => {
                 <TableCell>Strike Rate</TableCell>
                 <TableCell>6s</TableCell>
                 <TableCell>4s</TableCell>
+                <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -67,6 +79,11 @@ const PlayerDetails = () => {
                   <TableCell>{(100*stat.runsScored/stat.noOfBallsFaced).toFixed(2)}</TableCell>
                   <TableCell>{stat.noOf6s}</TableCell>
                   <TableCell>{stat.noOf4s}</TableCell>
+                  <TableCell>
+                      <Button variant="contained" sx={{ mt: 2 }} onClick={()=>handlePlayerUpdate(stat)}>
+                          Update
+                      </Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -87,6 +104,7 @@ const PlayerDetails = () => {
                 <TableCell>Wickets</TableCell>
                 <TableCell>Average</TableCell>
                 <TableCell>Economy</TableCell>
+                <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -94,18 +112,23 @@ const PlayerDetails = () => {
                 <TableRow key={stat._id}>
                   <TableCell>{stat.leagueType}</TableCell>
                   <TableCell>{stat.matchesPlayed}</TableCell>
-                  <TableCell>{(stat.noOfBallsBowled/6).toFixed(2)}</TableCell>
+                  <TableCell>{(stat.noOfBallsBowled/6).toFixed(0)}</TableCell>
                   <TableCell>{stat.runsGiven}</TableCell>
                   <TableCell>{stat.wicketsTaken}</TableCell>
                   <TableCell>{(stat.runsGiven/stat.matchesPlayed).toFixed(2)}</TableCell>
-                  <TableCell>{(stat.runsGiven/stat.noOfBallsBowled).toFixed(2)}</TableCell>
+                  <TableCell>{((stat.runsGiven/stat.noOfBallsBowled*6)).toFixed(2)}</TableCell>
+                  <TableCell>
+                      <Button variant="contained" sx={{ mt: 2 }} onClick={()=>handlePlayerUpdate(stat)}>
+                          Update
+                      </Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
 
-        
+        <EditPlayerPerformance open={openDialog} onClose={()=> setOpenDialog(false)} initialData={{...playerStat,playerId:player?._id}}/>
       </Paper>
     </div>
   );

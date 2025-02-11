@@ -19,9 +19,9 @@ const EditExtraStats = ({ open, onClose, initialData }) => {
     };
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
       <DialogTitle>Edit Extras</DialogTitle>
-      <DialogContent>
+      <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2, padding: "1rem" }}>
         <TextField label="Byes" type="number" fullWidth value={extras.byes} onChange={(e) => setExtras({...extras,byes:e.target.value})} />
         <TextField label="LegByes" type="number" fullWidth value={extras.legByes} onChange={(e) => setExtras({...extras,legByes:e.target.value})} />
         <TextField label="Wides" type="number" fullWidth value={extras.wides} onChange={(e) => setExtras({...extras,wides:e.target.value})} />

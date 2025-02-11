@@ -1,4 +1,4 @@
-import { AdminPanelSettingsOutlined, Apps, ExitToApp } from '@mui/icons-material';
+import { AdminPanelSettingsOutlined, Apps } from '@mui/icons-material';
 import {
     Box,
     Stack,

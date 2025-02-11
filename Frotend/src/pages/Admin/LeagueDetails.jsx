@@ -41,7 +41,11 @@ const LeagueDetails = () => {
   return isLoading ? (
     <Loader />
   ) : (
-    <div>
+    <div
+    style={{
+      height:"100%"
+    }}
+    >
       <Paper 
         elevation={3}
         sx={{
@@ -51,6 +55,7 @@ const LeagueDetails = () => {
           justifyContent: "center",
           alignItems: "center",
           gap: "1rem",
+          minHeight:"100%"
         }}>
         <Typography variant="h4" gutterBottom>
           {league?.name} ({league?.season})

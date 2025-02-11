@@ -40,13 +40,18 @@ const MatchDetails = () => {
   }, [data]);
 
   return isLoading ? <Loader /> : (
-    <div>
+    <div
+      style={{
+        height:"100%"
+      }}
+    >
       <Paper
         elevation={3}
         sx={{
           padding: "2rem 1rem",
           borderRadius: "12px",
           backgroundColor: "background.paper",
+          minHeight:"100%"
         }}
       >
 

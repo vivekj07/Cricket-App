@@ -63,7 +63,7 @@ const EditTeam = ({ open, onClose, team }) => {
           Upload Logo
           <input type="file" hidden accept="image/*" onChange={handleFileChange} />
         </Button>
-        {logoSrc && <img src={logoSrc} alt="Team Logo" style={{ maxWidth: "100px", marginTop: "10px" }} />}
+        {logoSrc && <img src={logoSrc} alt="Team Logo" style={{ width: "170px",height:"auto", marginTop: "10px" }} />}
 
         <div style={{ display: "flex", justifyContent: "space-between", marginTop: "1rem" }}>
           <Button variant="contained" color="primary" onClick={handleSubmit}>

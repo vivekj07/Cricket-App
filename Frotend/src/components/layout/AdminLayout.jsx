@@ -1,9 +1,9 @@
-import { Box, Drawer, Grid2 as Grid, IconButton, Menu } from '@mui/material';
+import { Box, Drawer, Grid2 as Grid, IconButton } from '@mui/material';
 import React, { useState } from 'react';
 
 import SideBar from '../Admin/SideBar';
 import Header from "./Header";
-import { Close } from '@mui/icons-material';
+import { Close, Menu } from '@mui/icons-material';
 
 const AdminLayout = (WrappedComponent) => {
   return ()=>{

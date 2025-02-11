@@ -16,9 +16,9 @@ const EditScore = ({ open, onClose, initialData }) => {
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
       <DialogTitle>Edit Score</DialogTitle>
-      <DialogContent>
+      <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2, padding: "1rem" }}>
         <TextField label="Runs" type="number" fullWidth value={score.runs} onChange={(e) => setScore({ ...score, runs: e.target.value })} />
         <TextField label="Wickets" type="number" fullWidth value={score.wickets} onChange={(e) => setScore({ ...score, wickets: e.target.value })} />
         <TextField label="Overs" type="number" fullWidth value={score.overs} onChange={(e) => setScore({ ...score, overs: e.target.value })} />

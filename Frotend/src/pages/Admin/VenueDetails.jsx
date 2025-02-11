@@ -48,7 +48,7 @@ const VenueDetails = () => {
           justifyContent: "center",
           alignItems: "center",
           gap: "1rem",
-          height:"100%"
+          minHeight:"100%"
         }}
       >
         <Typography variant="h4" gutterBottom>

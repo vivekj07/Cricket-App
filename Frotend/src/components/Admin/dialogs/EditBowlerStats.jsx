@@ -17,9 +17,9 @@ const EditBowlerStats = ({ open, onClose, initialData }) => {
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
       <DialogTitle>Edit Bowler Stats</DialogTitle>
-      <DialogContent>
+      <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2, padding: "1rem" }}>
         <TextField label="Overs" type="number" fullWidth value={bowler.overs} onChange={(e) => setBowler({ ...bowler, overs: e.target.value })} />
         <TextField label="Runs Conceded" type="number" fullWidth value={bowler.runsConceded} onChange={(e) => setBowler({ ...bowler, runsConceded: e.target.value })} />
         <TextField label="Wickets" type="number" fullWidth value={bowler.wickets} onChange={(e) => setBowler({ ...bowler, wickets: e.target.value })} />

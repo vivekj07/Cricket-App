@@ -68,7 +68,14 @@ const NewUmpire = ({ open, onClose }) => {
     return (
         <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
             <DialogTitle>Add New Umpire</DialogTitle>
-            <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2, padding: "1rem" }}>
+            <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2, padding: "1rem" ,
+                overflow: "auto",
+                "&::-webkit-scrollbar": { // Corrected syntax
+                  display: "none",
+                },
+                scrollbarWidth: "none", // For Firefox
+                msOverflowStyle: "none", // For IE and Edge
+            }}>
                 <TextField label="Full Name" name="fullName" value={umpireData.fullName} onChange={handleChange} required />
                 <TextField label="Date of Birth" type="date" name="dob" value={umpireData.dob} onChange={handleChange} required InputLabelProps={{ shrink: true }} />
                 <TextField label="Country" name="country" value={umpireData.country} onChange={handleChange} required />
@@ -85,7 +92,7 @@ const NewUmpire = ({ open, onClose }) => {
                     Upload Photo
                     <input type="file" hidden accept="image/*" onChange={handleFileChange} />
                 </Button>
-                {avatarSrc && <img src={avatarSrc} alt="Umpire Avatar" width="100" height="100" />}
+                {avatarSrc && <img src={avatarSrc} alt="Umpire Avatar" width="170px" height="auto" />}
 
                 <div style={{ display: "flex", justifyContent: "space-between", marginTop: "1rem" }}>
                     <Button variant="contained" color="primary" onClick={handleSubmit}>

@@ -75,7 +75,10 @@ const MatchDetails = () => {
   }, [data]);
 
   const handleGenerateScoreboard = async () => {
-    await generateScoreboard({match:id});
+    window.alert("Make Sure to Update Teams Before Generate ScoreBoard !")
+    if (window.confirm("Are you sure you want to Generate coreboard?")) {
+      await generateScoreboard({match:id});
+    }
   };
 
   const handleDeleteScoreboard = async () => {
@@ -117,13 +120,18 @@ const MatchDetails = () => {
   }
 
   return isLoading ? <Loader /> : (
-    <div>
+    <div
+    style={{
+      height:"100%"
+    }}
+    >
       <Paper
         elevation={3}
         sx={{
           padding: "2rem 1rem",
           borderRadius: "12px",
           backgroundColor: "background.paper",
+          minHeight:"100%",
         }}
       >
         <Box display="flex" justifyContent="center" gap={2} mb={3}>

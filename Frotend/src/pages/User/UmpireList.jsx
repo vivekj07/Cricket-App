@@ -60,7 +60,7 @@ const UmpireList = () => {
   return (
     <div>
       <Paper elevation={3} sx={{ padding: "2rem 1rem" }}>
-        {isLoading ? <Loader /> : <Table rows={umpires} columns={columns} heading="Umpire Management" />}
+        {isLoading ? <Loader /> : <Table rows={umpires} columns={columns} heading="Umpires" />}
       </Paper>
     </div>
   );
