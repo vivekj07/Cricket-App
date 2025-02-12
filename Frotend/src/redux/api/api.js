@@ -5,7 +5,7 @@ const api = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: `${import.meta.env.VITE_SERVER}/api/v1/`,
     }),
-    tagTypes: ["Player","Team","League","Match","Venue","Umpire"],
+    tagTypes: ["Player","Team","League","Match","Venue","Umpire","ContactUS","FileUpload"],
     endpoints: (builder) => ({
 
         // User
@@ -458,6 +458,58 @@ const api = createApi({
             invalidatesTags:["League"]
         }),
 
+        // Contact US
+        getAllContactUS: builder.query({
+            query: () => ({
+                url: `contactUS/all`,
+                credentials: "include"
+            }),
+            providesTags:["ContactUS"]
+        }),
+        newContactUS:builder.mutation({
+            query:(body)=>({
+                url:`contactUS/new`,
+                credentials:"include",
+                method:"POST",
+                body
+            }),
+        }),
+        deleteContactUSData:builder.mutation({
+            query:(id)=>({
+                url:`contactUS/${id}`,
+                credentials:"include",
+                method:"DELETE",
+            }),
+            invalidatesTags:["ContactUS"]
+        }),
+
+        // FilesUpload
+        getAllFiles: builder.query({
+            query: () => ({
+                url: `fileupload/all`,
+                credentials: "include"
+            }),
+            providesTags:["FileUpload"]
+        }),
+        newFilesUpload:builder.mutation({
+            query:(formData)=>({
+                url:`fileupload/new`,
+                credentials:"include",
+                method:"POST",
+                body:formData
+            }),
+            invalidatesTags:["FileUpload"]
+        }),
+        deleteFile:builder.mutation({
+            query:({publicId})=>({
+                url:`fileupload/delete`,
+                credentials:"include",
+                method:"DELETE",
+                body:{publicId}
+            }),
+            invalidatesTags:["FileUpload"]
+        }),
+
     })
 })
 export default api
@@ -468,6 +520,8 @@ export const {
     useGetAllLeaguesQuery, useGetLeagueDetailsQuery,
     useGetAllVenuesQuery, useGetVenueQuery,
     useGetAllUmpiresQuery, useGetUmpireQuery,
+    useGetAllContactUSQuery,
+    useGetAllFilesQuery,
 
     useNewMatchMutation, useDeleteMatchMutation, useUpdateMatchMutation, useUpdateMatchResultMutation,
     useUpdatePlayerStatsMutation,
@@ -480,5 +534,7 @@ export const {
     useDeleteUmpireMutation, useNewUmpireMutation, useUpdateUmpireMutation,
     useGenerateScoreBoardMutation, useDeleteScoreBoardMutation, useUpdateMOMMutation, useUpdateTeamScoreMutation,
     useUpdateBatsManStatMutation, useUpdateBowlerStatMutation, useUpdateExtrasMutation,
-    useUpdatePointsTableMutation, useUpdatePointsTableDirectlyMutation
+    useUpdatePointsTableMutation, useUpdatePointsTableDirectlyMutation,
+    useNewContactUSMutation, useDeleteContactUSDataMutation,
+    useNewFilesUploadMutation, useDeleteFileMutation,
 } = api

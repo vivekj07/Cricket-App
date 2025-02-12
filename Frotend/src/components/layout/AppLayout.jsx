@@ -79,7 +79,10 @@ const AppLayout = (WrappedComponent) => {
                     </IconButton>
                 </Box> 
 
-                <Drawer open={isMobile} onClose={handleMobile}>
+                <Drawer open={isMobile} onClose={handleMobile}
+                 PaperProps={{
+                  sx: { width: "60vw" , maxWidth:"350px"} // This correctly applies width
+                }}>
                     <UserSideBar />
                 </Drawer>
 

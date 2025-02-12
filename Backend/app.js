@@ -16,6 +16,8 @@ import scoreBoardRoute from "./routes/ScoreBoard.js"
 import venueRoute from "./routes/Venue.js"
 import umpireRoute from "./routes/Umpire.js"
 import pointsTableRoute from "./routes/PointsTable.js"
+import contactUSRoute from "./routes/ContactUS.js"
+import fileUploadRoute from "./routes/FileUpload.js"
 import userRoute from "./routes/User.js"
 import { connectDB } from "./utils/database.js"
 import { errorMiddleware } from "./middlewares/error.js"
@@ -67,15 +69,17 @@ app.use("/api/v1/scoreBoard",isAuthenticated,scoreBoardRoute)
 app.use("/api/v1/venue",isAuthenticated,venueRoute)
 app.use("/api/v1/umpire",isAuthenticated,umpireRoute)
 app.use("/api/v1/pointsTable",isAuthenticated,pointsTableRoute)
+app.use("/api/v1/contactUS",isAuthenticated,contactUSRoute)
+app.use("/api/v1/fileupload",isAuthenticated,fileUploadRoute)
 
 io.on("connection",(socket)=>{
-  console.log("connected",socket.id)
+  // console.log("connected",socket.id)
   onlineUsers.add(socket.id)
 
   io.emit("onlineUsers",onlineUsers.size)
   
   socket.on("disconnect",()=>{
-    console.log("disconnected")
+    // console.log("disconnected")
     onlineUsers.delete(socket.id)
     io.emit("onlineUsers", onlineUsers.size);
   })

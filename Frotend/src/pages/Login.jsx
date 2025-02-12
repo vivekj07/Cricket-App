@@ -289,6 +289,10 @@ sx={{
                                         </IconButton>
 
                                     </Stack>
+                                    <Typography mt={"10px"} variant='caption' color='secondary'>
+                                        Upload File Less Than 5MB
+                                    </Typography>
+
                                     <TextField
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
@@ -299,6 +303,7 @@ sx={{
                                         sx={{
                                             backgroundColor: "rgba(255, 255, 255, 0.8)", // Light background for input
                                             borderRadius: "8px",
+                                            mt: "1rem"
                                           }}
                                     />
                                     <TextField

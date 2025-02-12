@@ -8,6 +8,7 @@ import { green ,tomato} from '../../constants/colors'
 import { useCustomMutation } from '../../hooks/hooks'
 import { useLogOutMutation } from '../../redux/api/api'
 import { userExist, userNotExist } from '../../redux/reducers/auth'
+import Logo from "../../../public/assets/TitleLogo.png"
 
 // import image from "../../../public/Logo.png"
 
@@ -41,7 +42,7 @@ const Header = () => {
                 position:"relative"
                 // flexGrow: 1
             }}>
-                <AppBar
+                <AppBar elevation={0}
                     sx={{
                         backgroundColor: green,
                         // position: "relative",
@@ -61,10 +62,10 @@ const Header = () => {
                                 // display: { xs: "none", sm: "flex" }
                             }}
                         >
-                            <Avatar src={"image"}
+                            <Avatar src={Logo}
                                 sx={{
-                                    height: '40px',
-                                    width: '40px',
+                                    height: '45px',
+                                    width: '45px',
                                     // backgroundColor: 'transparent',
                                     // filter: 'brightness(0) invert(1)', // Converts the image to white (you can adjust this to other colors)
 

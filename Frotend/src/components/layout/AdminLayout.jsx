@@ -2,10 +2,9 @@ import { Box, Drawer, Grid2 as Grid, IconButton } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
 import SideBar from '../Admin/SideBar';
-import Header from "./Header";
 import { Close, Menu } from '@mui/icons-material';
 import { getSocket } from '../../socket';
-import { green } from '../../constants/colors';
+import { green, greenBorder } from '../../constants/colors';
 
 const AdminLayout = (WrappedComponent) => {
   return ()=>{
@@ -45,11 +44,12 @@ const AdminLayout = (WrappedComponent) => {
                         height: "2.5rem",
                         width: "2.5rem",
                         borderRadius: "50%",
-                        backgroundColor: "black",
+                        backgroundColor: "white",
+                        border:`3px solid ${greenBorder}`,
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        color: "white",
+                        color: "black",
                         fontSize: "1.5rem",
                         fontWeight: "bold",
                         boxShadow: "0 0 10px 0 rgba(0,0,0,0.1)",
@@ -65,13 +65,13 @@ const AdminLayout = (WrappedComponent) => {
                         position: "fixed",
                         right: "0.5rem",
                         top: "3.5rem",
+                        zIndex: 1000
                     }}
                 >
                     <IconButton onClick={handleMobile}
                         sx={{
                             backgroundColor: 'black',
                             color: "white",
-
                         }}
                     >
                         {isMobile ? <Close /> : <Menu />}

@@ -12,6 +12,7 @@ node_modules
 dist
 dist-ssr
 *.local
+Currently Unused
 
 # Editor directories and files
 .vscode/*

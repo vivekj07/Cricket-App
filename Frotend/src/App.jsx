@@ -14,6 +14,8 @@ import { LayoutLoader } from "./pages/Loaders"
 
 // User Pages
 const Login = lazy(()=> import("../src/pages/Login"))
+const About = lazy(()=> import("../src/pages/About"))
+
 const Home = lazy(()=> import("../src/pages/User/Home"))
 const UserPlayerList = lazy(()=> import("../src/pages/User/PlayerList"))
 const UserPlayerDetails = lazy(()=> import("../src/pages/User/PlayerDetails"))
@@ -43,6 +45,8 @@ const UmpireList = lazy(()=> import("../src/pages/Admin/UmpireList"))
 const UmpireDetails = lazy(()=> import("../src/pages/Admin/UmpireDetails"))
 const VenueList = lazy(()=> import("../src/pages/Admin/VenueList"))
 const VenueDetails = lazy(()=> import("../src/pages/Admin/VenueDetails"))
+const Feedback = lazy(()=> import("../src/pages/Admin/Feedback"))
+const ManageUserHome = lazy(()=> import("../src/pages/Admin/ManageUserHome"))
 
 
 function App() {
@@ -78,7 +82,9 @@ function App() {
           <Route element={
             <ProtectedRoute isAuthenticated={user}/>
           }>
+
               <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
               <Route path="/player" element={<UserPlayerList />} />
               <Route path="/player/:id" element={<UserPlayerDetails />} />
               <Route path="/team" element={<UserTeamList />} />
@@ -109,6 +115,8 @@ function App() {
               <Route path="/admin/umpire/:id" element={<UmpireDetails />} />
               <Route path="/admin/venue" element={<VenueList />} />
               <Route path="/admin/venue/:id" element={<VenueDetails />} />
+              <Route path="/admin/feedbacks" element={<Feedback />} />
+              <Route path="/admin/userhome" element={<ManageUserHome />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

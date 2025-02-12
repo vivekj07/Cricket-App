@@ -65,6 +65,8 @@ const SideBar = () => {
             <SideBarItem link={"/admin/league"} Icon={AdminPanelSettingsOutlined} name={"League"} />
             <SideBarItem link={"/admin/umpire"} Icon={AdminPanelSettingsOutlined} name={"Umpire"} />
             <SideBarItem link={"/admin/venue"} Icon={AdminPanelSettingsOutlined} name={"Venue"} />
+            <SideBarItem link={"/admin/feedbacks"} Icon={AdminPanelSettingsOutlined} name={"Feedback"} />
+            <SideBarItem link={"/admin/userhome"} Icon={AdminPanelSettingsOutlined} name={"UserHome"} />
             {/* <SideBarItem link={"/"} Icon={Apps} name={"GoTo App"} /> */}
 
             

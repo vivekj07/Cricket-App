@@ -53,13 +53,13 @@ const deleteFilesFromCloudinary = async (publicIds) => {
       const result = await cloudinary.api.delete_resources(publicIds);
       
       if (result.deleted) {
-        console.log('Deleted resources from Cloudinary');
+        console.log('Deleted resources');
       } else {
-        console.error('Error deleting files from Cloudinary:', result);
+        console.error('Error deleting files', result);
       }
     } catch (error) {
-      console.error('Error deleting files from Cloudinary:', error);
-      throw new Error("Error in deleting files from Cloudinary");
+      console.error('Error deleting files', error);
+      throw new Error("Error in deleting files");
     }
   };
 

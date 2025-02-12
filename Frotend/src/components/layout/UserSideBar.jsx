@@ -1,4 +1,4 @@
-import { Apps, ControlPointDuplicate, ExitToApp } from '@mui/icons-material';
+import { Apps, ControlPointDuplicate, ExitToApp, Info } from '@mui/icons-material';
 import {
     Box,
     Stack,
@@ -69,7 +69,7 @@ const SideBar = () => {
 
             
 
-            <LinkComponent to={"/"}
+            <LinkComponent to={"/about"}
                 sx={{
                     backgroundColor: "rgba(1,1,1,.8)",
                     color: "white",
@@ -77,9 +77,9 @@ const SideBar = () => {
                 }}
             >
                 <Stack direction={"row"} alignItems={"center"} spacing={"1rem"}>
-                    <Apps />
+                    <Info />
 
-                    <Typography>GoTo Home</Typography>
+                    <Typography>About US</Typography>
                 </Stack>
             </LinkComponent>
 
@@ -127,7 +127,7 @@ const SideBarItem = ({ link, Icon, name }) => (
 
 const LinkComponent = styled(Link)({
     textDecoration: "none",
-    padding: "1rem 2rem",
+    padding: "1rem 1rem",
     borderRadius: "1rem",
     cursor: "default",
     color: "black"

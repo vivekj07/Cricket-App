@@ -13,7 +13,7 @@ const PlayerList = () => {
     const navigate = useNavigate();
 
   const [players, setPlayers] = useState([]);
- 
+ console.log(players)
   const {data,isError,error,isLoading}=useGetAllPlayersQuery()
 
   useEffect(() => {
