@@ -35,7 +35,7 @@ const newUser = async (req, res, next) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      maxAge: 24 * 60 * 60 * 1000, 
+      maxAge: 15 * 60 * 60 * 1000, 
     };
 
     return res
@@ -69,7 +69,7 @@ const login = async (req, res, next) => {
             httpOnly: true,
             secure: true,
             sameSite: "none",
-            maxAge: 24 * 60 * 60 * 1000
+            maxAge: 10 * 60 * 60 * 1000
         }
         const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET)
         return res.status(200).cookie("cricketApp-user-token", token, cookieOptions).json({
@@ -166,9 +166,21 @@ const updateProfile = async (req, res, next) => {
     }
 }
 
+const getAllUsers = async (req, res, next) => { 
+    try {
+        const users = await User.find().sort({ createdAt: -1 })
+        return res.status(200).json({
+            success: true,
+            users
+        })
+    } catch (err) {
+        next(err)
+    }
+}
+
 
 
 export {
     getMyProfile,
-    newUser, login, logout,updateProfile
+    newUser, login, logout,updateProfile, getAllUsers
 }

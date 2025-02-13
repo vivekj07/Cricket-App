@@ -47,6 +47,7 @@ const VenueList = lazy(()=> import("../src/pages/Admin/VenueList"))
 const VenueDetails = lazy(()=> import("../src/pages/Admin/VenueDetails"))
 const Feedback = lazy(()=> import("../src/pages/Admin/Feedback"))
 const ManageUserHome = lazy(()=> import("../src/pages/Admin/ManageUserHome"))
+const UserList = lazy(()=> import("./pages/Admin/UserList"))
 
 
 function App() {
@@ -117,6 +118,7 @@ function App() {
               <Route path="/admin/venue/:id" element={<VenueDetails />} />
               <Route path="/admin/feedbacks" element={<Feedback />} />
               <Route path="/admin/userhome" element={<ManageUserHome />} />
+              <Route path="/admin/allusers" element={<UserList />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

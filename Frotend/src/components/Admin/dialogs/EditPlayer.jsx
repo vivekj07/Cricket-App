@@ -72,6 +72,9 @@ const EditPlayer = ({ open, onClose, player }) => {
     onClose();
   };
 
+  const roles = ["Batsman", "Bowler", "All-rounder", "Wicketkeeper"];
+  const battingStyles = ["Right", "Left"];
+
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>Edit Player</DialogTitle>
@@ -88,6 +91,21 @@ const EditPlayer = ({ open, onClose, player }) => {
         <TextField label="Country" name="country" value={playerData?.country} onChange={handleChange} required />
         <TextField label="Home Town" name="homeTown" value={playerData?.homeTown} onChange={handleChange} required />
         <TextField label="Jersey Number" type="number" name="jersyNo" value={playerData?.jersyNo} onChange={handleChange} />
+        <TextField select label="Role" name="role" value={playerData?.role} onChange={handleChange} required>
+                  {roles.map((role) => (
+                    <MenuItem key={role} value={role}>
+                      {role}
+                    </MenuItem>
+                  ))}
+                </TextField>
+                <TextField select label="Batting Style" name="battingStyle" value={playerData?.battingStyle} onChange={handleChange} required>
+                  {battingStyles.map((style) => (
+                    <MenuItem key={style} value={style}>
+                      {style}
+                    </MenuItem>
+                  ))}
+                </TextField>
+                <TextField label="Bowling Style" name="bowlingStyle" value={playerData?.bowlingStyle} onChange={handleChange} />
         <FormControlLabel control={<Checkbox checked={playerData?.isWicketKeeper} onChange={handleCheckboxChange} />} label="Is Wicketkeeper?" />
         <Button variant="contained" component="label">
           Upload Photo

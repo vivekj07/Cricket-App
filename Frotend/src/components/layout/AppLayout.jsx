@@ -29,9 +29,17 @@ const AppLayout = (WrappedComponent) => {
                 
                 
                 <Grid item size={{md:2}} maxHeight={"100%"}
-                sx={{display:{xs:"none",md:"block", overflow:"auto",
-                  height:"100vh"
-                  // backgroundColor:"rgb(191, 233, 240)"
+                sx={{
+                  display:{xs:"none",md:"block", overflow:"auto",
+                  height:"100vh",
+                  overflow:"auto",
+                  "&::-webkit-scrollbar": {
+                      display: "none",
+                  },
+                    // Hide scrollbar for Firefox
+                    scrollbarWidth: "none",
+                  // Hide scrollbar for IE and Edge
+                   msOverflowStyle: "none",
                 }}}
                 >
                     <UserSideBar />

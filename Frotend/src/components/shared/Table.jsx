@@ -1,4 +1,4 @@
-import { Container, Paper } from '@mui/material'
+import { Container, Paper, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
 import { DataGrid } from "@mui/x-data-grid"
 
@@ -17,13 +17,18 @@ const Table = ({ rows, columns, heading, rowHeight = 50 }) => {
             <Paper
                 elevation={0}
                 sx={{
-                    margin: "1rem",
-                    padding: "1rem",
+                    // margin: "1rem",
+                    // padding: "1rem",
                     fontSize: "2rem",
                     textAlign: "center"
                 }}>
-                {heading}
+                {heading} <br></br>
+                {/* <Typography variant="caption" >
+                    Click on Three Dots For More Options
+                </Typography> */}
             </Paper>
+
+            
 
             <DataGrid
                 sx={{

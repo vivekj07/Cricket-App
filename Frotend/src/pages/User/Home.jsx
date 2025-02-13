@@ -18,7 +18,13 @@ const Home = () => {
 
   useErrors([{ isError, error }]);
 
-  
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return "Good Morning! Ready for some cricket action?";
+    if (hour < 18) return "Good Afternoon! Stay updated with live scores.";
+    return "Good Evening! Review match stats & highlights.";
+  };
+
   return (
     <Box sx={{ backgroundColor: "white", height: "100%"  }}>
 
@@ -28,8 +34,8 @@ const Home = () => {
           <CircularProgress size={60} thickness={4} sx={{ color: "primary.main" }} />
         </Box>
       ) : files.length === 0 ? (
-        <Typography textAlign="center" color="textSecondary" variant="h6">
-          No files available.
+        <Typography textAlign="center" color="textSecondary" variant="h6" paddingTop={"30%"} fontWeight={"bold"}>
+          {getGreeting()} 
         </Typography>
       ) : (
         <Grid container 

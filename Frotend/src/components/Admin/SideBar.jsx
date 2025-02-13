@@ -14,7 +14,7 @@ const SideBar = () => {
             sx={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "1rem"
+                gap: "0.5rem"
             }}
         >
             {/* <Typography variant='h5'>GoReply.</Typography> */}
@@ -67,6 +67,7 @@ const SideBar = () => {
             <SideBarItem link={"/admin/venue"} Icon={AdminPanelSettingsOutlined} name={"Venue"} />
             <SideBarItem link={"/admin/feedbacks"} Icon={AdminPanelSettingsOutlined} name={"Feedback"} />
             <SideBarItem link={"/admin/userhome"} Icon={AdminPanelSettingsOutlined} name={"UserHome"} />
+            <SideBarItem link={"/admin/allusers"} Icon={AdminPanelSettingsOutlined} name={"Users"} />
             {/* <SideBarItem link={"/"} Icon={Apps} name={"GoTo App"} /> */}
 
             
@@ -129,7 +130,7 @@ const SideBarItem = ({ link, Icon, name }) => (
 
 const LinkComponent = styled(Link)({
     textDecoration: "none",
-    padding: "1rem 2rem",
+    padding: "1rem 1rem",
     borderRadius: "1rem",
     cursor: "default",
     color: "black"

@@ -9,6 +9,12 @@ const api = createApi({
     endpoints: (builder) => ({
 
         // User
+        getAllusers: builder.query({
+            query: () => ({
+                url: `user/all`,
+                credentials: "include"
+            }),
+        }),
         signUp:builder.mutation({
             query:(formData)=>({
                 url:"user/new",
@@ -514,6 +520,7 @@ const api = createApi({
 })
 export default api
 export const {
+    useGetAllusersQuery,
     useGetAllMatchesQuery,useGetAllMatchesOfLeagueQuery,useGetMatchDetailsQuery, 
     useGetAllPlayersQuery, useGetPlayerDetailsQuery, 
     useGetAllTeamsQuery, useGetTeamDetailsQuery, 

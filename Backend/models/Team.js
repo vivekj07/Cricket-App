@@ -4,7 +4,7 @@ const performanceSchema = new mongoose.Schema(
   {
     leagueType: {
       type: String,
-      enum: ['T20', 'ODI', 'Test', 'Other'],
+      enum: ['T20', 'ODI', 'Test',"Domestic","Box", 'Other'],
       required: true,
     },
     matchesPlayed: {

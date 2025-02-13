@@ -14,7 +14,7 @@ const SideBar = () => {
             sx={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "1rem"
+                gap: "0.5rem"
             }}
         >
             {/* <Typography variant='h5'>GoReply.</Typography> */}

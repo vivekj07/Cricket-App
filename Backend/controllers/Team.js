@@ -70,6 +70,12 @@ const newTeam = async (req, res, next) => {
           leagueType:"Test"
         },
         {
+          leagueType:"Domestic"
+        },
+        {
+          leagueType:"Box"
+        },
+        {
           leagueType:"Other"
         },
       ]
@@ -145,11 +151,25 @@ const updateTeamPerformance = async (req, res, next) => {
 
     let index= team.performance.findIndex((team)=> team.leagueType == format)
 
-    team.performance[index].matchesPlayed=matchesPlayed
-    team.performance[index].wins=wins
-    team.performance[index].losses=losses
-    team.performance[index].ties=ties
-    team.performance[index].netRunRate=netRunRate
+    if (index === -1) {
+      team.performance.push({
+        leagueType: format,
+        matchesPlayed,
+        wins,
+        losses,
+        ties,
+        netRunRate,
+      });
+    } else {
+      team.performance[index] = {
+        ...team.performance[index],
+        matchesPlayed,
+        wins,
+        losses,
+        ties,
+        netRunRate,
+      };
+    }
 
     await team.save();
 

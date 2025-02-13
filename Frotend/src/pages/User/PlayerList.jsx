@@ -1,4 +1,4 @@
-import { Avatar, Button, Paper } from "@mui/material";
+import { Avatar, Button, Paper, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 
@@ -13,7 +13,6 @@ const PlayerList = () => {
     const navigate = useNavigate();
 
   const [players, setPlayers] = useState([]);
- console.log(players)
   const {data,isError,error,isLoading}=useGetAllPlayersQuery()
 
   useEffect(() => {
@@ -70,6 +69,8 @@ const PlayerList = () => {
       sx={{ 
         padding: "2rem 1rem", 
       }}>
+
+        
         
         {
             isLoading ? <LayoutLoader /> :
